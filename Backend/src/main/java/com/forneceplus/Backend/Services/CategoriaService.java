@@ -1,0 +1,56 @@
+package com.forneceplus.Backend.Services;
+import com.forneceplus.Backend.Entities.Categoria;
+import com.forneceplus.Backend.Exceptions.ResourceNotFoundException;
+import com.forneceplus.Backend.Repositories.CategoriaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class CategoriaService {
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
+    public List<Categoria> ListarCategorias(){
+        return categoriaRepository.findAll();
+    }
+    public Categoria SalvarCategoria(Categoria categoria){
+        return categoriaRepository.save(categoria);
+    }
+    public Optional<Categoria> BuscarCategoriaPorId(String id){
+        return categoriaRepository.findById(id);
+    }
+    public void DeletarCategoria(String id){
+        if (!categoriaRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Categoria não encontrada");
+        }
+        categoriaRepository.deleteById(id);
+    }
+    public Categoria AtualizarCategoria(String id, Categoria categoriaNova){
+
+        Categoria categoriaAntiga = categoriaRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada"));
+
+
+        categoriaAntiga.setDescricao(categoriaNova.getDescricao());
+
+        if(categoriaNova.getNomeCategoria() != null){
+            categoriaAntiga.setNomeCategoria(categoriaNova.getNomeCategoria());
+        }
+        if (categoriaNova.getStatus() != null) {
+            categoriaAntiga.setStatus(categoriaNova.getStatus());
+        }
+
+        return categoriaRepository.save(categoriaAntiga);
+    }
+    /*
+    public List<Categoria> findByIdCategoria(String Id) {
+        return categoriaRepository.findByIdCategoria(Id);
+    }
+
+    Aqui é um exemplo de como usar a busca especifica do repository
+     */
+}

@@ -1,0 +1,27 @@
+
+<div class="Container">
+  <div class="login-form">
+    <form [formGroup]="loginForm" class="loginContainer">
+      <h1>Login</h1>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input type="email" formControlName="email" matInput placeholder="Digite seu email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input type="password" formControlName="senha" matInput placeholder="Digite sua senha">
+      </mat-form-field>
+
+      <button  matButton="filled" type="submit" [disabled]="loginForm.invalid" (click)="enviarDados()">Enviar</button>
+
+      <p *ngIf="mensagemErro" class="error-message">
+        {{ mensagemErro }}
+      </p>
+
+      <p>Não possui uma conta? <a href="/cadastro">Cadastre-se</a></p>
+    </form>
+  </div>
+  
+</div>

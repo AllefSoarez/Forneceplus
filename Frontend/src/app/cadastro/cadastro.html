@@ -1,0 +1,67 @@
+<div class="Container">
+	<div class="login-form">
+		<form [formGroup]="cadastroForm" class="loginContainer" (ngSubmit)="enviarDados()">
+			<h1>Cadastro de usuário</h1>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Nome</mat-label>
+				<input type="text" formControlName="nome" matInput placeholder="Digite seu nome">
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>E-mail</mat-label>
+				<input type="email" formControlName="email" matInput placeholder="Digite seu e-mail">
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Senha</mat-label>
+				<input type="password" formControlName="senha" matInput placeholder="Digite sua senha">
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>CPF</mat-label>
+				<input type="text" formControlName="CPF" matInput maxlength="11" placeholder="Digite 11 números">
+				<mat-error *ngIf="cadastroForm.get('CPF')?.hasError('pattern')">Digite exatamente 11 números.</mat-error>
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Endereço</mat-label>
+				<input type="text" formControlName="endereco" matInput placeholder="Digite seu endereço">
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Telefone</mat-label>
+				<input type="number" formControlName="telefone" matInput placeholder="Digite seu telefone">
+			</mat-form-field>
+
+			<button matButton="filled" type="submit" [disabled]="cadastroForm.invalid">Cadastrar</button>
+			<p *ngIf="mensagemSucesso" class="success-message">{{ mensagemSucesso }}</p>
+			<p *ngIf="mensagemErro" class="error-message">{{ mensagemErro }}</p>
+
+			<p>Possui uma conta? <a href="/login">Faça login</a></p>
+			
+		</form>
+	</div>
+
+	<section class="list-wrapper">
+		<h2>Usuários cadastrados</h2>
+		<p *ngIf="listarUsuarios.length === 0">Nenhum usuário cadastrado.</p>
+		<div class="table-wrapper" *ngIf="listarUsuarios.length > 0">
+			<table>
+				<thead><tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>Email</th>
+					<th>senha</th>
+					<th>CPF</th>
+					<th>Endereço</th>
+					<th>Telefone</th>
+				</tr></thead>
+				<tbody>
+					<tr *ngFor="let usuario of listarUsuarios"><td>{{ usuario.idUsuario }}</td><td>{{ usuario.nome }}</td><td>{{ usuario.email }}</td><td>{{ usuario.senha }}</td><td>{{ usuario.CPF }}</td><td>{{ usuario.endereco }}</td><td>{{ usuario.telefone }}</td>
+						<td class="row-actions"><button matButton="outlined" type="button" (click)="editarCadastro(usuario)">Editar</button><button matButton="outlined" color="warn" type="button" (click)="excluirUsuario(usuario)">Excluir</button></td></tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</div>

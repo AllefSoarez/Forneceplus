@@ -1,0 +1,65 @@
+<div class="Container">
+	<div class="login-form">
+		<form [formGroup]="fornecedorForm" class="loginContainer" (ngSubmit)="enviarDados()">
+			<h1>{{ fornecedorEmEdicao ? 'Editar fornecedor' : 'Cadastro de fornecedor' }}</h1>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Nome</mat-label>
+				<input type="text" formControlName="nomeFornecedor" matInput placeholder="Digite o nome do fornecedor">
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>E-mail</mat-label>
+				<input type="email" formControlName="emailFornecedor" matInput placeholder="Digite o e-mail">
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Descrição</mat-label>
+				<input type="text" formControlName="descricaoFornecedor" matInput placeholder="Descreva o fornecedor">
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Telefone</mat-label>
+				<input type="number" formControlName="telefoneFornecedor" matInput placeholder="Digite o telefone">
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>Endereço</mat-label>
+				<input type="text" formControlName="enderecoFornecedor" matInput placeholder="Digite o endereço">
+			</mat-form-field>
+
+			<mat-form-field appearance="outline">
+				<mat-label>CNPJ</mat-label>
+				<input type="text" formControlName="CNPJFornecedor" matInput maxlength="14" placeholder="Digite 14 números">
+			</mat-form-field>
+			
+
+			<div class="form-actions">
+				<button matButton="filled" type="submit" [disabled]="fornecedorForm.invalid">{{ fornecedorEmEdicao ? 'Atualizar' : 'Cadastrar' }}</button>
+				<button matButton="outlined" type="button" *ngIf="fornecedorEmEdicao" (click)="cancelarEdicao()">Cancelar</button>
+			</div>
+
+		</form>
+	</div>
+
+	<section class="list-wrapper">
+		<h2>Fornecedores cadastrados</h2>
+		<p *ngIf="listarFornecedores.length === 0">Nenhum fornecedor cadastrado.</p>
+		<div class="table-wrapper" *ngIf="listarFornecedores.length > 0">
+			<table>
+				<thead><tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>E-mail</th>
+					<th>Telefone</th>
+					<th>CNPJ</th>
+					<th>Ações</th>
+				</tr></thead>
+				<tbody>
+					<tr *ngFor="let fornecedor of listarFornecedores"><td>{{ fornecedor.idFornecedor }}</td><td>{{ fornecedor.nomeFornecedor }}</td><td>{{ fornecedor.emailFornecedor }}</td><td>{{ fornecedor.telefoneFornecedor }}</td><td>{{ fornecedor.CNPJFornecedor }}</td>
+						<td class="row-actions"><button matButton="outlined" (click)="editarFornecedor(fornecedor)">Editar</button><button matButton="outlined" color="warn" (click)="excluirFornecedor(fornecedor)">Excluir</button></td></tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</div>
