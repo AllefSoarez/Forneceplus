@@ -1,132 +1,53 @@
-<div align="center">
-
 FornecePlus
 
-Gestão comercial em uma aplicação Full Stack
-
-Uma solução web para centralizar o gerenciamento de usuários, fornecedores, categorias, produtos e vendas, combinando uma interface Angular com uma API REST desenvolvida em Java e Spring Boot.
-
-<br>
-
-
-
-
-
-
-
-<br>
-
-Funcionalidades ·
-Arquitetura ·
-Instalação ·
-API ·
-Testes
-
-</div>
-
-Sobre o projeto
-
-O FornecePlus é uma aplicação web Full Stack voltada ao gerenciamento de informações e operações comerciais. O projeto reúne uma interface desenvolvida com Angular e um backend Java com Spring Boot, responsável por disponibilizar recursos por meio de uma API REST e persistir os dados no MongoDB.
-
-A estrutura separa a apresentação, as regras de negócio e o acesso aos dados, favorecendo a organização e a evolução do código.
-
-Visão geral
-
-<table>
-  <tr>
-    <td width="50%">
-      <h3>Gestão de cadastros</h3>
-      Organização dos registros de usuários, fornecedores, categorias e produtos.
-    </td>
-    <td width="50%">
-      <h3>Controle de vendas</h3>
-      Recursos para registrar vendas e administrar os respectivos itens.
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>Interface web</h3>
-      Aplicação Angular com páginas e componentes organizados por funcionalidade.
-    </td>
-    <td width="50%">
-      <h3>API REST</h3>
-      Endpoints HTTP estruturados em controllers, services e repositories.
-    </td>
-  </tr>
-</table>
-
-Funcionalidades
-
-Usuários: criar, consultar, atualizar e excluir registros.
-
-Fornecedores: manter os dados dos fornecedores.
-
-Categorias: organizar os produtos por categoria.
-
-Produtos: gerenciar o catálogo de produtos.
-
-Vendas: registrar e consultar vendas.
-
-Itens de venda: administrar os itens relacionados às vendas.
-
-Interface de acesso: páginas de início, cadastro e login.
-
-Validação de dados: recursos de validação no backend.
-
-Nota: a existência das telas de cadastro e login não significa, por si só, que o sistema tenha autenticação e autorização completas. Avalie esses requisitos antes de disponibilizar a aplicação publicamente.
-
-Tecnologias utilizadas
-
-Camada
+Aplicação web Full Stack desenvolvida para o gerenciamento de operações comerciais. O sistema permite centralizar o gerenciamento de usuários, fornecedores, categorias, produtos e vendas, utilizando Angular no frontend, Java com Spring Boot no backend e MongoDB para persistência de dados.
 
 Tecnologias
 
-Frontend
+* Java 17
+* Spring Boot 4
+* Spring Web MVC
+* Spring Data MongoDB
+* Bean Validation
+* Lombok
+* Angular 22
+* TypeScript
+* RxJS
+* Angular Router e Angular Forms
+* Angular Material/CDK
+* MongoDB
+* Maven Wrapper
+* npm
 
-Angular 22, TypeScript, RxJS, Angular Router, Angular Forms, Angular Material/CDK, HTML e CSS
+Funcionalidades
 
-Backend
+* Cadastro, consulta, atualização e exclusão de usuários.
+* Gerenciamento de fornecedores.
+* Gerenciamento de categorias.
+* Cadastro e gerenciamento de produtos.
+* Registro e consulta de vendas.
+* Gerenciamento de itens de venda.
+* Interface web com páginas de início, cadastro e login.
+* Validação de dados no backend.
+* Tratamento de exceções da aplicação.
+* Comunicação entre frontend e backend por meio de uma API REST.
 
-Java 17, Spring Boot 4, Spring Web MVC, Spring Data MongoDB, Bean Validation e Lombok
-
-Banco de dados
-
-MongoDB
-
-Build e dependências
-
-Maven Wrapper, npm
-
-Testes
-
-Testes automatizados no backend e configuração de testes no frontend
-
-Arquitetura
-
-O projeto é dividido em duas aplicações independentes que se comunicam por requisições HTTP.
-
-flowchart LR
-    U[Usuário] --> FE[Frontend Angular]
-    FE -->|HTTP / JSON| API[API REST]
-    API --> C[Controllers]
-    C --> S[Services]
-    S --> R[Repositories]
-    R --> DB[(MongoDB)]
-
-Organização do repositório
+Estrutura do projeto
 
 Forneceplus-main/
 ├── Backend/
-│   ├── src/main/java/com/forneceplus/Backend/
-│   │   ├── Config/
-│   │   ├── Controllers/
-│   │   ├── Entities/
-│   │   ├── Exceptions/
-│   │   ├── Repositories/
-│   │   ├── Services/
-│   │   └── Utils/
-│   ├── src/main/resources/
-│   ├── src/test/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/forneceplus/Backend/
+│   │   │   │   ├── Config/
+│   │   │   │   ├── Controllers/
+│   │   │   │   ├── Entities/
+│   │   │   │   ├── Exceptions/
+│   │   │   │   ├── Repositories/
+│   │   │   │   ├── Services/
+│   │   │   │   └── Utils/
+│   │   │   └── resources/
+│   │   └── test/
 │   ├── .env.example
 │   ├── pom.xml
 │   ├── mvnw
@@ -147,235 +68,172 @@ Forneceplus-main/
     ├── angular.json
     └── package.json
 
-Responsabilidade de cada camada
+Arquitetura
 
-Camada
+A aplicação é dividida em duas partes principais: frontend e backend.
 
-Responsabilidade
+O frontend, desenvolvido com Angular, é responsável pela interface e pela interação com o usuário. O backend, desenvolvido com Spring Boot, disponibiliza uma API REST para processar as requisições e acessar o banco de dados MongoDB.
 
-Controllers
+O backend segue uma organização em camadas:
 
-Receber requisições HTTP e retornar respostas da API
+1. Entities: representam as estruturas de dados do domínio.
+2. Repositories: realizam as operações de acesso e persistência no MongoDB.
+3. Services: concentram as operações e regras de negócio.
+4. Controllers: recebem as requisições HTTP e disponibilizam os endpoints da API.
+5. Config: reúne as configurações da aplicação.
+6. Exceptions: organiza o tratamento de exceções.
+7. Utils: contém funções auxiliares.
 
-Services
+Recursos da API
 
-Concentrar operações e regras da aplicação
+Os endpoints estão organizados por recurso:
 
-Repositories
+Recurso	Endpoint base
+Usuários	/usuarios
+Fornecedores	/fornecedores
+Categorias	/categorias
+Produtos	/produtos
+Vendas	/vendas
+Itens de venda	/itens
 
-Acessar os dados persistidos no MongoDB
+As operações disponíveis devem ser consultadas na implementação de cada controller. Os recursos podem contemplar consultas, criação, atualização e exclusão.
 
-Entities
+Exemplos de uso
 
-Representar as estruturas de dados do domínio
+Consultar produtos
 
-Config
+Requisição:
 
-Reunir configurações da aplicação
+GET /produtos
 
-Exceptions
+Comando:
 
-Tratar situações de erro específicas
+curl http://localhost:8081/produtos
 
-Utils
+A requisição consulta os produtos disponibilizados pela API.
 
-Agrupar utilitários e funções auxiliares
+As operações de criação e atualização utilizam requisições HTTP com dados em JSON, conforme os campos definidos para cada recurso.
 
-Começando
+Como executar localmente
 
 Pré-requisitos
 
-Instale as ferramentas abaixo antes de iniciar:
+* Git
+* Java JDK 17
+* Node.js e npm
+* MongoDB local ou MongoDB Atlas
 
-Git
+O Maven Wrapper está incluído no backend, dispensando a instalação independente do Maven.
 
-Java JDK 17
-
-Node.js e npm
-
-MongoDB local ou MongoDB Atlas
-
-O backend já inclui o Maven Wrapper, portanto não é necessário instalar o Maven separadamente.
-
-1. Clone o repositório
+1. Clonar o repositório
 
 git clone <URL_DO_REPOSITORIO>
 cd Forneceplus-main
 
-Substitua <URL_DO_REPOSITORIO> pela URL real do repositório.
+Substitua <URL_DO_REPOSITORIO> pela URL do repositório.
 
-2. Configure o MongoDB
+2. Configurar o banco de dados
 
-Dentro da pasta Backend, crie um arquivo .env com base no .env.example:
+Na pasta Backend, crie um arquivo .env com base no arquivo .env.example.
 
-MONGODB_URI=mongodb+srv://<usuario>:<senha>@<cluster-host>/?appName=<nome-da-aplicacao>
+Configure a conexão com o MongoDB:
+
+MONGODB_URI=sua_uri_de_conexao
 MONGODB_DATABASE=Forneceplus
 
-Informe os dados da sua instância MongoDB. Se utilizar uma instalação local, ajuste a URI para o endereço correspondente.
+Utilize os dados da sua instância MongoDB e confirme se os nomes das variáveis correspondem à configuração do backend.
 
-Importante: não compartilhe nem envie credenciais, senhas ou arquivos .env para o GitHub. Mantenha as informações privadas no ambiente local.
+Não envie credenciais ou arquivos .env com informações privadas para o GitHub.
 
-3. Inicie o backend
+3. Executar o backend
 
-Execute em um terminal:
-
-Windows — PowerShell ou CMD
+Windows:
 
 cd Backend
 .\mvnw.cmd spring-boot:run
 
-Linux ou macOS
+Linux ou macOS:
 
 cd Backend
 chmod +x mvnw
 ./mvnw spring-boot:run
 
-Com a configuração válida, a API estará disponível em:
+A API estará disponível em:
 
 http://localhost:8081
 
-4. Inicie o frontend
+4. Executar o frontend
 
-Em um segundo terminal, volte à raiz do projeto e execute:
+Abra outro terminal na raiz do projeto:
 
 cd Frontend
 npm install
 npm start
 
-A aplicação Angular ficará disponível, por padrão, em:
+A interface web estará disponível em:
 
 http://localhost:4200
 
-Abra o endereço no navegador. O frontend está configurado para realizar chamadas à API local em http://localhost:8081.
+Mantenha o backend e o frontend em execução para utilizar a aplicação.
 
-API REST
-
-A API disponibiliza endpoints para os principais recursos do sistema.
-
-Recurso
-
-Endpoint base
-
-Métodos
-
-Usuários
-
-/usuarios
-
-GET, POST, GET /{id}, PUT /{id}, DELETE /{id}
-
-Fornecedores
-
-/fornecedores
-
-GET, POST, GET /{id}, PUT /{id}, DELETE /{id}
-
-Categorias
-
-/categorias
-
-GET, POST, GET /{id}, PUT /{id}, DELETE /{id}
-
-Produtos
-
-/produtos
-
-GET, POST, GET /{id}, PUT /{id}, DELETE /{id}
-
-Vendas
-
-/vendas
-
-GET, POST, GET /{id}, PUT /{id}, DELETE /{id}
-
-Itens de venda
-
-/itens
-
-GET, POST, GET /{id}, PUT /{id}, DELETE /{id}
-
-Exemplo de requisição
-
-Com o backend em execução, uma requisição para consultar os produtos pode ser feita com:
-
-curl http://localhost:8081/produtos
-
-As operações de criação e atualização recebem dados em JSON, de acordo com os campos esperados pelo recurso correspondente.
-
-Testes e build
+Testes e compilação
 
 Backend
 
-Na pasta Backend, execute os testes automatizados:
+Executar os testes automatizados:
 
-Windows
+Windows:
 
 .\mvnw.cmd test
 
-Linux ou macOS
+Linux ou macOS:
 
 ./mvnw test
 
-Para compilar e empacotar o backend:
+Gerar o pacote da aplicação:
 
 ./mvnw package
 
 Frontend
 
-Na pasta Frontend, instale as dependências e execute os testes:
+Instalar as dependências e executar os testes:
 
 npm install
 npm test
 
-Para gerar a build de produção:
+Gerar a build de produção:
 
 npm run build
 
+Execute cada comando dentro da pasta correspondente. A execução dos testes depende da configuração presente no projeto.
+
 Configurações importantes
 
-Banco de dados: as operações que dependem de persistência exigem uma URI MongoDB válida e acessível.
+* Banco de dados: o backend precisa de uma conexão válida com o MongoDB.
+* Comunicação: o frontend utiliza a API local na porta 8081.
+* CORS: a origem de desenvolvimento configurada é http://localhost:4200.
+* Segurança: as telas de cadastro e login não garantem, por si só, a existência de autenticação e autorização completas.
 
-URL da API: o frontend utiliza http://localhost:8081 nas chamadas HTTP. Para outros ambientes, ajuste essa configuração.
+Antes de disponibilizar a aplicação em produção, revise as configurações de ambiente, as origens CORS permitidas, a proteção de credenciais e os mecanismos de segurança.
 
-CORS: o backend permite a origem de desenvolvimento http://localhost:4200. Em produção, configure as origens autorizadas para o domínio utilizado.
+Status do projeto
 
-Segurança: antes de publicar a aplicação em produção, avalie autenticação, autorização, validação de entradas, tratamento de erros e proteção de credenciais.
+Recursos documentados:
 
-Próximas melhorias
+* Estrutura Full Stack com Angular e Spring Boot.
+* Integração com MongoDB.
+* Organização do backend em camadas.
+* Recursos de gerenciamento comercial.
+* Configuração de execução e compilação das aplicações.
 
-Algumas evoluções que podem fortalecer o projeto:
+Possíveis melhorias:
 
-Centralizar URLs e parâmetros em configurações por ambiente.
-
-Documentar a API com OpenAPI/Swagger.
-
-Ampliar os testes unitários e de integração.
-
-Implementar e documentar autenticação e autorização, conforme os requisitos.
-
-Preparar configuração de implantação para ambientes de homologação e produção.
-
-Contribuição
-
-Para contribuir com o projeto:
-
-Crie uma branch para a sua alteração.
-
-Mantenha commits objetivos e descritivos.
-
-Execute os testes disponíveis.
-
-Abra um Pull Request explicando as mudanças realizadas.
+* Documentar os endpoints com OpenAPI/Swagger.
+* Ampliar os testes unitários e de integração.
+* Implementar autenticação e autorização, conforme os requisitos.
+* Adicionar configurações específicas para produção.
+* Automatizar o processo de integração e implantação contínuas.
 
 Licença
 
-Não foi identificada uma licença no repositório fornecido. Antes de redistribuir ou reutilizar o código, defina a licença desejada e inclua um arquivo LICENSE.
-
-<div align="center">
-
-FornecePlus
-Aplicação Full Stack para gestão comercial.
-
-<sub>Angular · Java · Spring Boot · MongoDB</sub>
-
-</div>
+Não foi identificada uma licença no material utilizado para esta documentação. Caso o projeto seja disponibilizado para reutilização ou distribuição, defina a licença apropriada e inclua um arquivo LICENSE no repositório.
